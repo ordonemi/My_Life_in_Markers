@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>GIS Mapping App</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.27/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.27/"></script>
+  <style>
+    #viewDiv {
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="viewDiv"></div>
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/Graphic",
+      "esri/layers/GraphicsLayer",
+      "esri/widgets/Popup"
+    ], function(Map, MapView, Graphic, GraphicsLayer, Popup) {
+      const map = new Map({
+        basemap: "streets"
+      });
+
+      const view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-100.392, 20.588], 
+        zoom: 12
+      });
+
+      const graphicsLayer = new GraphicsLayer();
+      map.add(graphicsLayer);
+
+      const markerLocations = [
+        {
+          name: "Querétaro Cathedral",
+          latitude: 20.588980,
+          longitude: -100.378060,
+          info: "This is the Querétaro Cathedral, a beautiful landmark that is frequented by tourists and locals a like."
+        },
+        {
+          name: "Cerro de las Campanas",
+          latitude: 20.589395,
+          longitude: -100.391562,
+          info: "Cerro de las Campanas is a hill known for its historical and cultural significance."
+        },
+        {
+          name: "Museo de Arte de Querétaro",
+          latitude: 20.594480,
+          longitude: -100.384677,
+          info: "The Museo de Arte de Querétaro is an art museum showcasing a wide range of artworks."
+        },
+
+        {
+          name: "Teatro de la República",
+          latitude: 20.592831,
+          longitude: -100.383133,
+          info: "Teatro de la Republica is a theater in the historic center of Queretaro. In 1867, the trial of Maximilian I of Mexico was held in this theater."
+        },
+        {
+          name: "Plaza de Armas",
+          latitude: 20.588604,
+          longitude: -100.389097,
+          info: "Plaza de Armas is the main square of Querétaro, surrounded by historic buildings, businesses, and other tourist attractions."
+        },
+        {
+          name: "Acueducto de Querétaro",
+          latitude: 20.591810,
+          longitude: -100.389638,
+          info: "The Acueducto de Querétaro is an iconic aqueduct that dates back to the 18th century."
+        },
+        {
+          name: "Jardín Zenea",
+          latitude: 20.593361,
+          longitude: -100.388465,
+          info: "Jardín Zenea is a popular park in the heart of Querétaro."
+        },
+        {
+          name: "Museo Regional de Querétaro",
+          latitude: 20.591405,
+          longitude: -100.388234,
+          info: "The Museo Regional de Querétaro is a museum that showcases the history and culture of the region."
+        },
+        {
+          name: "Templo de Santa Rosa de Viterbo",
+          latitude: 20.590167,
+          longitude: -100.392399,
+          info: "Templo de Santa Rosa de Viterbo is a beautiful Baroque-style church in Querétaro."
+        },
+        {
+          name: "Parque Alameda Hidalgo",
+          latitude: 20.587890,
+          longitude: -100.393388,
+          info: "Parque Alameda Hidalgo is a historic park with gardens, fountains, and monuments."
+        },
+        {
+          name: "Plaza de los Fundadores",
+          latitude: 20.592393,
+          longitude: -100.387823,
+          info: "Plaza de los Fundadores is a square honoring the founders of Querétaro."
+        },
+        {
+          name: "Plaza Puerta La Victoria",
+          latitude: 20.58617500566632,
+          longitude: -100.38137780736457,
+          info: "Plaza Victoria is a shopping mall located close to my grandmother's house. We woul always come here whenever we visit family in Queretaro."
+        },
+        {
+          name: "Unidad Deportiva Josefa Ortiz de Dominguez",
+          latitude: 20.58455442515151, 
+          longitude: -100.37886905470866,
+          info: "Unidad Deportiva Josefa Ortiz De Dominguez, or \"la deportiva\" as we liked to call is most like what we would call a YMCA or a community center. Growing up I would always come here with my cousins to play basketball, soccer, tennis, and to just goof around."
+        },
+        {
+          name: "Mama Irma's House",
+          latitude: 20.582105989969943, 
+          longitude: -100.37946245234323,
+          info: "Mama Irma is what we called our paternal grandma, and this is her house. Growing up, the whole family would come together at her house to eat, celebrate birthdays, and even just to spend time together. I have a lot of good memories from this house."
+        },
+        {
+        name: "Colegio Finlandes de Queretaro",
+          latitude: 20.582959965676313,  
+          longitude: -100.41965883713006,
+          info: "Colegio Finlandes was the elementary school that I attended in Queretaro. It was the last school I attended in Mexico before I moved to the United States."
+        },
+        {
+        name: "Mama Grande's House",
+          latitude: 20.585750673798913,   
+          longitude: -100.37578638401138,
+          info: "Mama Grande is what we called our maternal grandma, and this is her house. I didn't spend as much time as I would've wanted here, but I have a lot of good memories of family gatherings in this house."
+        },
+        {
+        name: "La Mariposa",
+          latitude: 20.59460092394382,   
+          longitude: -100.39249929314994,
+          info: "La Mariposa is a restaurant in downtown that my family frequented when I was younger. I would always get the same sandwich everytime I went there for some reason."
+        },
+        {
+        name: "Parque Queretaro 2000",
+          latitude: 20.61816711707606,  
+          longitude: -100.39797039393532,
+          info: "Parque Queretaro 2000 is a huge park in Queretaro. It has basketball courts, soccer fields, pool, camping areas, and many other attractions. We would always come as a family when I was little and would rent 4-man carts that we could pedal accross the entire park."
+        },
+        {
+        name: "Parque Bicentenario",
+          latitude: 20.733346750490597, 
+          longitude: -100.44895061524508,
+          info: "Parque Bicentenario is a really cool amusement park in Queretaro. It is equivalent to a small yet fun Six Flags. I have a lot of fun memories here when I would come with my cousins."
+        },
+        {
+        name: "La Joya",
+          latitude: 20.568413223490186,  
+          longitude: -100.41997830730813,
+          info: "La Joya is the name of the neighborhood I lived in when I was little. It's where I have most of my memories of being little. To this day we own the home, but we rent it out while we're not there."
+        },        
+      ];
+
+      markerLocations.forEach(function(location) {
+
+        const marker = new Graphic({
+          geometry: {
+            type: "point",
+            latitude: location.latitude,
+            longitude: location.longitude
+          },
+          attributes: {
+            name: location.name,
+            info: location.info
+          },
+          popupTemplate: {
+            title: "{name}",
+            content: "{info}"
+          }
+        });
+        graphicsLayer.add(marker);
+      });
+
+      const popup = new Popup({
+        view: view,
+        dockEnabled: true,
+        dockOptions: {
+          position: "top-right",
+          buttonEnabled: false
+        }
+      });
+      view.ui.add(popup, "top-right");
+
+      view.on("click", function(event) {
+        view.hitTest(event).then(function(response) {
+          const results = response.results;
+          results.forEach(function(result) {
+            const graphic = result.graphic;
+            const attributes = graphic.attributes;
+            const info = attributes.info;
+
+            popup.open({
+              location: event.mapPoint,
+              content: graphic.popupTemplate
+            });
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
+
