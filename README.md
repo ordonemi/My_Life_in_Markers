@@ -8,8 +8,6 @@ is able to click on any of the markers to display a popup window that will give 
 As was mentiond above, the purpose of this software is to demonstrate the use of ArcGIS with HTMl and Javascript. ArcGIS has a variety of features and libraries that could really expand the scope
 of this project, but the purpose of this project was more so to establish a strong foundation that can be built upon as I continue to learn more. 
 
-[Software Demo Video](http://youtube.link.goes.here)
-
 # Development Environment
 
 * VSCode
