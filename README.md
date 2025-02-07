@@ -1,6 +1,6 @@
 # Overview
 
-This website is designed to showcase the user of ArcGIS alongside HTML and Javascipt. The user can access the website by using the following link: https://ordonemi.github.io/My_Life_in_Markers/gis_project. 
+This website is designed to showcase the use of ArcGIS alongside HTML and Javascipt. The user can access the website by using the following link: https://ordonemi.github.io/My_Life_in_Markers/gis_project. 
 The website displays a basic map of the city of Queretaro, Mexico which is the city I was born in and spent the majority of my childhood in. Throughout the map the user will be able
 to see various markers that point to different locations. Some of these locations are big cultural attractions in Queretaro, while others have big personal meaning in my life. The user 
 is able to click on any of the markers to display a popup window that will give more information about the location. 
